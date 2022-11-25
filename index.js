@@ -6,6 +6,7 @@ const Manager = require('./lib/Manager');
 const fs = require('fs');
 const inquirer = require('inquirer');
 
+let team = []
 //Question Arrays
 const managerQuestions = [
     {
@@ -60,6 +61,12 @@ const managerQuestions = [
                 return true;
             }
         }
+    },
+    {
+        type: 'confirm',
+        name: 'addEmployee',
+        message: 'Would you like to add more team members?',
+        default: false
     }
 ]
 
@@ -143,13 +150,34 @@ const employeeQuestions = [
             default: false
         }
     ]
-    //To run after each inquirer.prompt 
-    const addEmployee = [
-        {
-            type: 'confirm',
-            name: 'add',
-            message: 'Would you like to add more team members?',
-            default: false
-        }
-    ]
+    
 
+    function writeToFile(fileName, data) {
+        fs.writeFile(fileName, data, err => {
+            if (err)
+            console.log(err);
+            else {
+                console.log('Employee profiles successfully generated.')
+            }
+        })
+    }
+    function init() {
+        inquirer.prompt(managerQuestions)
+        .then((answers) => {
+            let manager = new Manager (answers.name, answers.id, answers.email, answers.officeNumber)
+            team.push(manager)
+            return genManager(answers)
+        })
+        inquirer.prompt(employeeQuestions)
+        .then((response) => {
+            if(response.role == 'Engineer') {
+                team.push(new Engineer (response.name, response.id, response.email, response.github))
+                return genEngineer(response)
+            } else team.push(new Intern (response.name, response.id, response.email, respones.school))
+                return genIntern(response)
+        })
+        writeToFile('./dist/renderedOutput')
+        
+    }
+
+    init()

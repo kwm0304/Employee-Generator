@@ -1,15 +1,15 @@
 //Might not end up being data or 'this.'
 //Need to specify role
-const genManager = function (data) {
+const genManager = function (answers) {
     return `<article class="card">
     <section class="card-title">
-    <p class="name">${this.name}</p>
-    <p class="fa-solid fa-mug-hot"> ${this.role}</p>
+    <p class="name">${answers.name}</p>
+    <p class="fa-solid fa-mug-hot"> ${answers.role}</p>
 </section>
 <section>
-    <p class="id">ID: ${this.id}</p>
-    <p class="email">Email: <a href="mailto:${this.email}"></a></p>
-    <p class="officeNumber">Office Number: ${this.officeNumber}</p>
+    <p class="id">ID: ${answers.id}</p>
+    <p class="email">Email: <a href="mailto:${answers.email}"></a></p>
+    <p class="officeNumber">Office Number: ${answers.officeNumber}</p>
 </section>
     </article>`
 }
@@ -59,6 +59,6 @@ function templateHelper (data) {
 
         </card>
 </main>
-</body>
+</body
 </html>`
 }
