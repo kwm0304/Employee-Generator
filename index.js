@@ -6,7 +6,7 @@ const Manager = require('./lib/Manager');
 const fs = require('fs');
 const inquirer = require('inquirer');
 
-
+//Question Arrays
 const managerQuestions = [
     {
         type: 'input',
@@ -62,6 +62,7 @@ const managerQuestions = [
         }
     }
 ]
+
 
 const employeeQuestions = [
         {
@@ -142,5 +143,13 @@ const employeeQuestions = [
             default: false
         }
     ]
-    
+    //To run after each inquirer.prompt 
+    const addEmployee = [
+        {
+            type: 'confirm',
+            name: 'add',
+            message: 'Would you like to add more team members?',
+            default: false
+        }
+    ]
 

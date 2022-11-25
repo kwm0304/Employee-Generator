@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <title>Team Profile Generator</title>
+</head>
+<body>
+    <header>My Team</header>
+    <card class="cards">
+        <!--Manager-->
+        <article class="card">
+        <section class="card-title">
+        <p class="name">${this.name}</p>
+        <p class="fa-solid fa-mug-hot"> ${this.role}</p>
+    </section>
+    <section>
+        <p class="id">ID: ${this.id}</p>
+        <p class="email">Email: <a href="mailto:${this.email}"></a></p>
+        <p class="officeNumber">Office Number: ${this.officeNumber}</p>
+    </section>
+        </article>
+    <!--Intern-->
+    <article class="card">
+    <section class="card-title">
+        <p class="name">${this.name}</p>
+        <p class="fa-solid fa-user-graduate"> ${this.role}</p>
+    </section>
+    <section>
+        <p class="id">ID: ${this.id}</p>
+        <p class="email">Email: ${this.email}<a href="mailto:${this.email}"></a></p>
+        <p class="school">School: ${this.school}</p>
+    </section>
+    </article>
+    <!--Engineer-->
+    <article class="card">
+    <section class="card-title">
+        <p class="name">Name: ${this.name}</p>
+        <p class="fa-solid fa-glasses"> ${this.role}</p>
+    </section>
+    <section>
+        <p class="id">ID: ${this.id} </p>
+        <p class="email">Email: <a href="mailto:${this.email}"></a></p>
+        <p class="gitHub" href="https://github.com/${this.github}" target="_blank" rel="noopener noreferrer" >GitHub: ${this.github}</p>
+    </section>
+    </article>
+</card>
+</main>
+</body>
+</html>
