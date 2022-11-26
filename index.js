@@ -5,6 +5,7 @@ const Intern = require('./lib/Intern');
 const Manager = require('./lib/Manager');
 const fs = require('fs');
 const inquirer = require('inquirer');
+const templateHelper = require('./src/templateHelper')
 
 let team = []
 //Question Arrays
@@ -80,6 +81,8 @@ function managerQuestions () {
     })
 };
 
+managerQuestions()
+
 function employeeQuestions () {
     inquirer.prompt([
         {
@@ -105,14 +108,11 @@ function employeeQuestions () {
             type: 'number',
             name: 'id',
             message: "Employee ID:",
-            validate: nameInput => {
-                if  (isNaN(nameInput)) {
-                    console.log ("Please enter the employee's ID")
-                    return false; 
-                } else {
-                    return true;
-                }
-            }
+            validate: value => {
+                const valid = !isNaN(parseFloat(value));
+                return valid || 'Must be a number'
+            }, 
+            filter: Number,
         },
         {
             type: 'input',
@@ -156,17 +156,19 @@ function employeeQuestions () {
         {
             type: 'confirm',
             name: 'newEmployee',
-            message: 'Would you like to add more team members?',
-            default: true
+            message: 'Would you like to add more team members?'
         }
     ]).then((response) => {
+        const engineer = new Engineer(response.name, response.id, response.email, response.github)
+        const intern = new Intern(response.name, response.id, response.email, response.school)
+    
         if(response.role == 'Engineer') {
-            team.push(new Engineer (response.name, response.id, response.email, response.github))
-        } else team.push(new Intern (response.name, response.id, response.email, response.school))
-    }).then((response) => {
-        if (response.newEmployee === 'false') {
-            return writeToFile()
-        } else employeeQuestions()
+            team.push(engineer)
+        } else (team.push(intern))
+    
+        if (response.newEmployee === 'true') {
+            employeeQuestions()
+        } else writeToFile()
     })
 }
     
@@ -180,5 +182,5 @@ function employeeQuestions () {
         })
     }
 }
-managerQuestions()
+
 init()
