@@ -8,70 +8,80 @@ const inquirer = require('inquirer');
 
 let team = []
 //Question Arrays
-const managerQuestions = [
-    {
-        type: 'input',
-        name: 'name',
-        message: 'Manager name:', 
-        validate: nameInput => {
-            if (nameInput) {
-                return true;
-            } else {
-                console.log ("Please enter manager name");
-                return false; 
-            }
-        }
-    },
-    {
-        type: 'input',
-        name: 'id',
-        message: "Manager ID:",
-        validate: idInput => {
-            if  (isNaN(idInput)) {
-                console.log ("Please enter manager's id")
-                return false; 
-            } else {
-                return true;
-            }
-        }
-    },
-    {
-        type: 'input',
-        name: 'email',
-        message: "Manager email:",
-        validate: email => {
-            valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
-            if (valid) {
-                return true;
-            } else {
-                console.log ('Please enter valid email')
-                return false; 
-            }
-        }
-    },
-    {
-        type: 'input',
-        name: 'officeNumber',
-        message: "Manager office number:",
-        validate: officeNumber => {
-            if  (isNaN(officeNumber)) {
-                console.log ('Please enter valid office number')
-                return false; 
-            } else {
-                return true;
-            }
-        }
-    },
-    {
-        type: 'confirm',
-        name: 'addEmployee',
-        message: 'Would you like to add more team members?',
-        default: false
-    }
-]
+function init() {
 
+function managerQuestions () {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'name',
+            message: 'Manager name:', 
+            validate: nameInput => {
+                if (nameInput) {
+                    return true;
+                } else {
+                    console.log ("Please enter manager name");
+                    return false; 
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'id',
+            message: "Manager ID:",
+            validate: idInput => {
+                if  (isNaN(idInput)) {
+                    console.log ("Please enter manager's id")
+                    return false; 
+                } else {
+                    return true;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: "Manager email:",
+            validate: email => {
+                valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
+                if (valid) {
+                    return true;
+                } else {
+                    console.log ('Please enter valid email')
+                    return false; 
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'officeNumber',
+            message: "Manager office number:",
+            validate: officeNumber => {
+                if  (isNaN(officeNumber)) {
+                    console.log ('Please enter valid office number')
+                    return false; 
+                } else {
+                    return true;
+                }
+            }
+        },
+        {
+            type: 'confirm',
+            name: 'addEmployee',
+            message: 'Would you like to add more team members?',
+            default: false
+        }
+    ]).then((answers) => {
+        let manager = new Manager (answers.name, answers.id, answers.email, answers.officeNumber)
+        team.push(manager)
+        if ((answers.newEmployee) === 'false') {
+            return writeToFile()
+        } else employeeQuestions()
+    })
+};
 
-const employeeQuestions = [
+function employeeQuestions () {
+    inquirer.prompt([
         {
             type: 'list',
             name: 'role',
@@ -147,13 +157,21 @@ const employeeQuestions = [
             type: 'confirm',
             name: 'newEmployee',
             message: 'Would you like to add more team members?',
-            default: false
+            default: true
         }
-    ]
+    ]).then((response) => {
+        if(response.role == 'Engineer') {
+            team.push(new Engineer (response.name, response.id, response.email, response.github))
+        } else team.push(new Intern (response.name, response.id, response.email, response.school))
+    }).then((response) => {
+        if (response.newEmployee === 'false') {
+            return writeToFile()
+        } else employeeQuestions()
+    })
+}
     
-
-    function writeToFile(fileName, data) {
-        fs.writeFile(fileName, data, err => {
+    function writeToFile() {
+        fs.writeFile('./dist/renderedoutput', templateHelper(team), err => {
             if (err)
             console.log(err);
             else {
@@ -161,23 +179,6 @@ const employeeQuestions = [
             }
         })
     }
-    function init() {
-        inquirer.prompt(managerQuestions)
-        .then((answers) => {
-            let manager = new Manager (answers.name, answers.id, answers.email, answers.officeNumber)
-            team.push(manager)
-            return genManager(answers)
-        })
-        inquirer.prompt(employeeQuestions)
-        .then((response) => {
-            if(response.role == 'Engineer') {
-                team.push(new Engineer (response.name, response.id, response.email, response.github))
-                return genEngineer(response)
-            } else team.push(new Intern (response.name, response.id, response.email, respones.school))
-                return genIntern(response)
-        })
-        writeToFile('./dist/renderedOutput')
-        
-    }
-
-    init()
+}
+managerQuestions()
+init()
