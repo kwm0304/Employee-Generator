@@ -1,43 +1,43 @@
 //Might not end up being data or 'this.'
 //Need to specify role
-const genManager = function (answers) {
+const genManager = function (manager) {
     return `<article class="card">
     <section class="card-title">
-    <p class="name">${answers.name}</p>
-    <p class="fa-solid fa-mug-hot"> ${answers.role}</p>
+    <p class="name">${manager.getName()}</p>
+    <p class="fa-solid fa-mug-hot"> ${manager.getRole()}</p>
 </section>
 <section>
-    <p class="id">ID: ${answers.id}</p>
-    <p class="email">Email: <a href="mailto:${answers.email}"></a></p>
-    <p class="officeNumber">Office Number: ${answers.officeNumber}</p>
+    <p class="id">ID: ${manager.getId()}</p>
+    <p class="email">Email: <a href="mailto:${manager.getEmail()}"></a></p>
+    <p class="officeNumber">Office Number: ${manager.getofficeNumber}</p>
 </section>
     </article>`
 }
 //If role == engineer
-const genEngineer = function (data) {
+const genEngineer = function (engineer) {
     return `<article class="card">
     <section class="card-title">
-        <p class="name">Name: ${this.name}</p>
-        <p class="fa-solid fa-glasses"> ${this.role}</p>
+        <p class="name">Name: ${engineer.getName()}</p>
+        <p class="fa-solid fa-glasses"> ${engineer.getRole()}</p>
     </section>
     <section>
-        <p class="id">ID: ${this.id} </p>
-        <p class="email">Email: <a href="mailto:${this.email}"></a></p>
-        <p class="gitHub" href="https://github.com/${this.github}" target="_blank" rel="noopener noreferrer" >GitHub: ${this.github}</p>
+        <p class="id">ID: ${engineer.getId()} </p>
+        <p class="email">Email: <a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}</a></p>
+        <p class="gitHub" href="https://github.com/${engineer.github}" target="_blank" rel="noopener noreferrer" >GitHub: ${engineer.github}</p>
     </section>
     </article>`
 }
 //If role == intern
-const genIntern = function (data) {
+const genIntern = function (intern) {
     return ` <article class="card">
     <section class="card-title">
-        <p class="name">${this.name}</p>
-        <p class="fa-solid fa-user-graduate"> ${this.role}</p>
+        <p class="name">${intern.getName()}</p>
+        <p class="fa-solid fa-user-graduate"> ${intern.getRole()}</p>
     </section>
     <section>
-        <p class="id">ID: ${this.id}</p>
-        <p class="email">Email: ${this.email}<a href="mailto:${this.email}"></a></p>
-        <p class="school">School: ${this.school}</p>
+        <p class="id">ID: ${intern.getId()}</p>
+        <p class="email">Email: ${this.email}<a href="mailto:${intern.getEmail()}">${intern.getEmail()}</a></p>
+        <p class="school">School: ${intern.school}</p>
     </section>
     </article>`
 }
