@@ -5,7 +5,7 @@ const Intern = require('./lib/Intern');
 const Manager = require('./lib/Manager');
 const fs = require('fs');
 const inquirer = require('inquirer');
-const templateHelper = require('./src/templateHelper')
+const  templateHelper = require('./src/templateHelper')
 
 let team = []
 //Question Arrays
@@ -57,14 +57,11 @@ function managerQuestions () {
             type: 'input',
             name: 'officeNumber',
             message: "Manager office number:",
-            validate: officeNumber => {
-                if  (isNaN(officeNumber)) {
-                    console.log ('Please enter valid office number')
-                    return false; 
-                } else {
-                    return true;
-                }
-            }
+            validate: value => {
+            const valid = !isNaN(parseFloat(value));
+            return valid || 'Must be a number'
+            }, 
+            filter: Number
         },
         {
             type: 'confirm',
@@ -132,31 +129,19 @@ function employeeQuestions () {
             type: 'input',
             name: 'github',
             message: "Employee GitHub:",
-            when: (input) => input.role === "Engineer",
-            validate: nameInput => {
-                if (nameInput ) {
-                    return true;
-                } else {
-                    console.log ("Please enter valid gitHub page")
-                }
-            }
+            when: (input) => input.role === "Engineer"
         },
         {
             type: 'input',
             name: 'school',
             message: "Employee school:",
             when: (input) => input.role === "Intern",
-            validate: nameInput => {
-                if (nameInput) {
-                    return true;
-                } else {
-                    console.log ("Please enter intern's school.")
-                }}
         },
         {
             type: 'confirm',
             name: 'newEmployee',
-            message: 'Would you like to add more team members?'
+            message: 'Would you like to add more team members?',
+            default: true
         }
     ]).then((response) => {
         const engineer = new Engineer(response.name, response.id, response.email, response.github)
@@ -169,6 +154,7 @@ function employeeQuestions () {
         if (response.newEmployee === 'true') {
             employeeQuestions()
         } else writeToFile()
+        console.log(team)
     })
 }
     
