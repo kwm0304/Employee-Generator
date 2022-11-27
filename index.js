@@ -74,7 +74,7 @@ function managerQuestions () {
         team.push(manager)
         if ((answers.newEmployee) === 'false') {
             return writeToFile()
-        } else employeeQuestions()
+        } else return employeeQuestions()
     })
 };
 
@@ -141,7 +141,7 @@ function employeeQuestions () {
             type: 'confirm',
             name: 'newEmployee',
             message: 'Would you like to add more team members?',
-            default: true
+            default: false
         }
     ]).then((response) => {
         const engineer = new Engineer(response.name, response.id, response.email, response.github)
@@ -151,15 +151,15 @@ function employeeQuestions () {
             team.push(engineer)
         } else (team.push(intern))
     
-        if (response.newEmployee === 'true') {
-            employeeQuestions()
+        if (response.newEmployee === true) {
+            return employeeQuestions()
         } else writeToFile()
         console.log(team)
     })
 }
     
     function writeToFile() {
-        fs.writeFile('./dist/renderedoutput', templateHelper(team), err => {
+        fs.writeFile('./dist/renderedoutput.html', templateHelper(team), err => {
             if (err)
             console.log(err);
             else {

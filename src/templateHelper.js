@@ -9,8 +9,8 @@ function templateHelper(cardArray) {
     </section>
     <section>
         <p class="id">ID: "${manager.getId()}"</p>
-        <p class="email">Email: <a href="mailto:${manager.getEmail()}"></a></p>
-        <p class="officeNumber">Office Number: "${manager.officeNumber}"</p>
+        <p class="email">${manager.getEmail()}<a href="mailto:${manager.getEmail()}">${manager.getEmail()}</a></p>
+        <p class="officeNumber">Office Number: ${manager.officeNumber}</p>
     </section>
         </article>`
     }
@@ -18,13 +18,13 @@ function templateHelper(cardArray) {
     const genEngineer = function (engineer) {
         return `<article class="card">
         <section class="card-title">
-            <p class="name">Name: "${engineer.getName()}"</p>
-            <p class="fa-solid fa-glasses"> "${engineer.getRole()}"</p>
+            <p class="name">Name: ${engineer.getName()}</p>
+            <p class="fa-solid fa-glasses"> ${engineer.getRole()}</p>
         </section>
         <section>
-            <p class="id">ID: "${engineer.getId()}" </p>
-            <p class="email">Email: <a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}</a></p>
-            <p class="gitHub" href="https://github.com/${engineer.github}" target="_blank" rel="noopener noreferrer" >GitHub: ${engineer.github}</p>
+            <p class="id">ID: ${engineer.getId()} </p>
+            <p class="email">${engineer.getEmail()}<a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}</a></p>
+            <p class="gitHub"><a href="https://github.com/${engineer.getGitHub()}" target="_blank" rel="noopener noreferrer">GitHub: ${engineer.getGitHub()}</a></p>
         </section>
         </article>`
     }
@@ -32,13 +32,13 @@ function templateHelper(cardArray) {
     const genIntern = function (intern) {
         return ` <article class="card">
         <section class="card-title">
-            <p class="name">"${intern.getName()}"</p>
+            <p class="name">${intern.getName()}</p>
             <p class="fa-solid fa-user-graduate"> ${intern.getRole()}</p>
         </section>
         <section>
-            <p class="id">ID: "${intern.getId()}</p>
-            <p class="email">Email: ${intern.email}<a href="mailto:${intern.getEmail()}">${intern.getEmail()}</a></p>
-            <p class="school">School: "${intern.school}"</p>
+            <p class="id">ID: ${intern.getId()}</p>
+            <p class="email">${intern.getEmail()}<a href="mailto:${intern.getEmail()}">${intern.getEmail()}</a></p>
+            <p class="school">School: ${intern.getSchool()}</p>
         </section>
         </article>`
     }

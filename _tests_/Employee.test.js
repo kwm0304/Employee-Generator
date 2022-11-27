@@ -11,42 +11,44 @@ test('To see if correct name was returned from constructor', () => {
 });
 
 test('To see if correct id was returned from constructor', () => {
-    const employee = new Employee('Kenan', id)
     const id = 1
-
+    const employee = new Employee('Kenan', id)
+    
     expect(employee.id).toBe(1)
 });
 
 test('To see if correct email was returned from constructor', () => {
-    const employee = new Employee('Kenan', 1, email)
     const email = 'example@gmail.com'
+    const employee = new Employee('Kenan', 1, email)
+    
 
     expect(employee.email).toBe(email)
 });
 
 test('To see if getName method returns correct name', () => {
-    const employee = new Employee
     const testName = 'Cameron'
+    const employee = new Employee(testName)
 
-    expect(employee.getName()).toBe(testName)
+    expect(employee.getName()).toBe('Cameron')
 })
 
 test('To see if getRole method reutrns Employee', () => {
+    const employeeRole = 'Employee'
     const employee = new Employee
 
-    expect(employee.getRole()).toBe('Employee')
+    expect(employee.getRole()).toBe(employeeRole)
 })
 
 test('To see if getId method returns the correct id', () => {
-    const employee = new Employee('Kenan', id)
     const id = 1
+    const employee = new Employee('Kenan', id)
 
     expect(employee.getId()).toBe(id)
 });
 
 test('To see if getEmail returns the correct email', () => {
-    const employee = new Employee
-    const employeeEmail = 'example@gmail.com'
+    const email = 'example@gmail.com'
+    const employee = new Employee ('Kenan', 1, email)
 
-    expect(employee.getEmail()).toBe(employeeEmail)
+    expect(employee.getEmail()).toBe(email)
 })
