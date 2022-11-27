@@ -136,6 +136,9 @@ function employeeQuestions () {
             name: 'school',
             message: "Employee school:",
             when: (input) => input.role === "Intern",
+            filter(val) {
+                return val.toUpperCase();
+            } 
         },
         {
             type: 'confirm',
