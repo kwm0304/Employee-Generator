@@ -43,7 +43,7 @@ function templateHelper(cardArray) {
         </section>
         </article>`
     }
-   
+   //Using getRole method to assign objects in cardArray to appropriate functions -> push to html array -> join them together (concatenating components together into one chunk)
     cardArray.forEach(function(confirmedEmployee) {
         if (confirmedEmployee.getRole() === 'Manager') {
             renderedHTML.push(genManager(confirmedEmployee))
@@ -55,7 +55,7 @@ function templateHelper(cardArray) {
     return renderedHTML.join('')
 }
 
-
+//Exporting the html page to be written
 module.exports = (cardArray) => {
     return `
 

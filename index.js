@@ -8,7 +8,8 @@ const inquirer = require('inquirer');
 const  templateHelper = require('./src/templateHelper')
 
 let team = []
-//Question Arrays
+
+//Intializes program
 function init() {
 
 function managerQuestions () {
@@ -147,20 +148,21 @@ function employeeQuestions () {
             default: false
         }
     ]).then((response) => {
+        //assigns new instances of Engineer and Intern
         const engineer = new Engineer(response.name, response.id, response.email, response.github)
         const intern = new Intern(response.name, response.id, response.email, response.school)
-    
+        //adds this new instance to team array
         if(response.role == 'Engineer') {
             team.push(engineer)
         } else (team.push(intern))
-    
+        //If user wants to add another employee it restarts, if not writeFile
         if (response.newEmployee === true) {
             return employeeQuestions()
         } else writeToFile()
         console.log(team)
     })
 }
-    
+    //writes html file based on the newly populated templateHelper, or throws an error
     function writeToFile() {
         fs.writeFile('./dist/renderedoutput.html', templateHelper(team), err => {
             if (err)
