@@ -25,6 +25,8 @@ https://github.com/kwm0304/Employee-Generator
 
 ## License
 
+[License](https://github.com/kwm0304/Employee-Generator/blob/main/LICENSE)
+
 ## Tests
 
 On the command line run: npm run test
