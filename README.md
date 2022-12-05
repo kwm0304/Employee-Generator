@@ -21,7 +21,9 @@ On the command line run: node index
 
 ## Link
 
-https://github.com/kwm0304/Employee-Generator
+Repo link: https://github.com/kwm0304/Employee-Generator
+
+Video link: https://drive.google.com/file/d/1wYKXoGElzEdoPyK7xJ9SoaaHElPzRxgo/view
 
 ## License
 

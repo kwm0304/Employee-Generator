@@ -159,7 +159,6 @@ function employeeQuestions () {
         if (response.newEmployee === true) {
             return employeeQuestions()
         } else writeToFile()
-        console.log(team)
     })
 }
     //writes html file based on the newly populated templateHelper, or throws an error
